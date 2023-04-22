@@ -1,4 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+
+const isOpen = ref(false);
+const activeSort = ref(0);
+
+const sortOptions = ["популярности", "цене", "алфавиту"];
+
+const chooseSortOption = (idx: number) => {
+  activeSort.value = idx;
+  isOpen.value = !isOpen.value;
+};
+</script>
 
 <template>
   <div class="sort">
@@ -14,13 +26,18 @@
           fill="#2C2C2C" />
       </svg>
       <b>Сортировка по:</b>
-      <span>популярности</span>
+      <span @click="isOpen = !isOpen">{{ sortOptions[activeSort] }}</span>
     </div>
-    <div class="sort__popup">
+    <div
+      class="sort__popup"
+      v-show="isOpen">
       <ul>
-        <li class="active">популярности</li>
-        <li>цене</li>
-        <li>алфавиту</li>
+        <li
+          v-for="(item, index) in sortOptions"
+          :class="{ active: activeSort === index }"
+          @click="chooseSortOption(index)">
+          {{ item }}
+        </li>
       </ul>
     </div>
   </div>

@@ -6,4 +6,10 @@ import { RouterView } from "vue-router";
   <router-view></router-view>
 </template>
 
-<style scoped></style>
+<style lang="scss">
+@import "scss/variables";
+@import "scss/normalize";
+body {
+  background-color: $background;
+}
+</style>

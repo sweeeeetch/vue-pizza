@@ -1,33 +1,49 @@
 <script setup lang="ts">
-import MyButton from "@/components/MyButton.vue";
+import MyButton from "@/components/buttons/MyButton.vue";
+import { ref } from "vue";
 
-defineProps({
+const props = defineProps({
   title: { type: String, required: true },
   price: { type: Number, required: true },
+  image: { type: String, required: true },
+  sizes: { type: Array, required: true },
+  dough: { type: Array, required: true },
 });
+
+const doughNames = ["тонкое", "традиционное"];
+
+const activeSize = ref(0);
+const activeDough = ref(0);
 </script>
 
 <template>
   <div class="pizza-block">
     <img
       class="pizza-block__image"
-      src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
+      :src="image"
       alt="Pizza" />
     <h4 class="pizza-block__title">{{ title }}</h4>
     <div class="pizza-block__selector">
       <ul>
-        <li class="active">тонкое</li>
-        <li>традиционное</li>
+        <li
+          v-for="(item, index) in dough"
+          :class="{ active: activeDough === index }"
+          @click="activeDough = index">
+          {{ doughNames[item as any] }}
+        </li>
       </ul>
       <ul>
-        <li class="active">26 см.</li>
-        <li>30 см.</li>
-        <li>40 см.</li>
+        <li
+          v-for="(size, index) in sizes"
+          :class="{ active: activeSize === index }"
+          @click="activeSize = index">
+          {{ size }} см.
+        </li>
       </ul>
     </div>
     <div class="pizza-block__bottom">
       <div class="pizza-block__price">от {{ price }} ₽</div>
-      <my-button></my-button>
+      <my-button>Добавить</my-button>
     </div>
   </div>
 </template>

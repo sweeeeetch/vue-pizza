@@ -3,6 +3,9 @@ import Header from "@/components/Header.vue";
 import Categories from "@/components/Categories.vue";
 import Sort from "@/components/Sort.vue";
 import PizzaBlock from "@/components/PizzaBlock.vue";
+import pizzas from "@/assets/pizzas.json";
+
+console.log(pizzas);
 </script>
 
 <template>
@@ -17,23 +20,13 @@ import PizzaBlock from "@/components/PizzaBlock.vue";
         <h2 class="content__title">Все пиццы</h2>
         <div class="content__items">
           <PizzaBlock
-            title="Мексиканская"
-            :price="500" />
-          <PizzaBlock
-            title="Чизбургер-пицца"
-            :price="500" />
-          <PizzaBlock
-            title="Пепперони"
-            :price="500" />
-          <PizzaBlock
-            title="Гавайская"
-            :price="500" />
-          <PizzaBlock
-            title="Четыре сезона"
-            :price="500" />
-          <PizzaBlock
-            title="Сырный цыпленок"
-            :price="500" />
+            v-for="pizza in pizzas"
+            :key="pizza.id"
+            :title="pizza.title"
+            :price="pizza.price"
+            :image="pizza.imageUrl"
+            :sizes="pizza.sizes"
+            :dough="pizza.types" />
         </div>
       </div>
     </div>

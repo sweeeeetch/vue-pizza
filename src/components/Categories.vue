@@ -1,14 +1,20 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+
+const activeIndex = ref(0);
+const categoriesArray = ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"];
+</script>
 
 <template>
   <div class="categories">
     <ul>
-      <li class="active">Все</li>
-      <li>Мясные</li>
-      <li>Вегетарианская</li>
-      <li>Гриль</li>
-      <li>Острые</li>
-      <li>Закрытые</li>
+      <li
+        v-for="(item, index) in categoriesArray"
+        :key="index"
+        :class="{ active: index === activeIndex }"
+        @click="activeIndex = index">
+        {{ item }}
+      </li>
     </ul>
   </div>
 </template>
