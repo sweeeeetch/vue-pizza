@@ -1,9 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { RouterLink } from "vue-router";
+</script>
 
 <template>
   <div class="header">
     <div class="container">
-      <div class="header__logo">
+      <router-link
+        to="/"
+        class="header__logo">
         <img
           width="38"
           src="/pizza-logo.svg"
@@ -12,7 +16,7 @@
           <h1>Vue Pizza</h1>
           <p>самая вкусная пицца во вселенной</p>
         </div>
-      </div>
+      </router-link>
       <div class="header__cart">
         <a
           href="/cart.html"

@@ -1,48 +1,67 @@
-@import "variables";
-@import "normalize";
-body {
-  background-color: $background;
-}
+<script setup lang="ts">
+import { RouterLink } from "vue-router";
+</script>
 
-.wrapper {
-  width: calc(100vw - 100px);
-  height: 100%;
-  background-color: #fff;
-  margin: 50px auto;
-  border-radius: 10px;
-  max-width: 1400px;
-}
+<template>
+  <div class="container container--cart">
+    <div class="cart">
+      <div class="cart__top">
+        <h2 class="content__title">
+          <img
+            src="@/assets/svgs/cart.svg"
+            alt="" />
+          Корзина
+        </h2>
+        <div class="cart__clear">
+          <img
+            src="@/assets/svgs/trash.svg"
+            alt="" />
 
-.content {
-  padding: 40px 0;
+          <span>Очистить корзину</span>
+        </div>
+      </div>
+      <div class="content__items"></div>
+      <div class="cart__bottom">
+        <div class="cart__bottom-details">
+          <span> Всего пицц: <b>3 шт.</b> </span>
+          <span> Сумма заказа: <b>900 ₽</b> </span>
+        </div>
+        <div class="cart__bottom-buttons">
+          <router-link
+            to="/"
+            class="button button--outline button--add go-back-btn">
+            <svg
+              width="8"
+              height="14"
+              viewBox="0 0 8 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 13L1 6.93015L6.86175 1"
+                stroke="#D3D3D3"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
 
-  &__title {
-    margin: 35px 0;
-  }
+            <span>Вернуться назад</span>
+          </router-link>
+          <div class="button pay-btn">
+            <span>Оплатить сейчас</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
-  &__items {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  &__top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-}
-
-.container {
-  width: $container-width;
-  margin: 0 auto;
-
-  &--cart {
-    max-width: 820px;
-    margin: 90px auto;
-    .content__title {
-      margin: 0;
-    }
+<style lang="scss">
+@import "@/scss/variables";
+.container--cart {
+  max-width: 820px;
+  margin: 90px auto;
+  .content__title {
+    margin: 0;
   }
 }
 
@@ -98,109 +117,6 @@ body {
       }
       span {
         color: darken($color: #b6b6b6, $amount: 50);
-      }
-    }
-  }
-
-  &__item {
-    display: flex;
-    width: 100%;
-    border-top: 1px solid $gray-line;
-    padding-top: 30px;
-    margin-top: 30px;
-
-    &-img {
-      display: flex;
-      align-items: center;
-      margin-right: 15px;
-      width: 10%;
-
-      img {
-        width: 80px;
-        height: 80px;
-      }
-    }
-
-    &-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      width: 40%;
-
-      h3 {
-        font-weight: bold;
-        font-size: 22px;
-        line-height: 27px;
-        letter-spacing: 0.01em;
-      }
-
-      p {
-        font-size: 18px;
-        color: #8d8d8d;
-      }
-    }
-
-    &-count {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 13%;
-
-      &-minus {
-        svg {
-          path:first-of-type {
-            display: none;
-          }
-        }
-      }
-
-      b {
-        font-size: 22px;
-      }
-    }
-
-    &-price {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 33%;
-
-      b {
-        font-weight: bold;
-        font-size: 22px;
-        letter-spacing: 0.01em;
-      }
-    }
-
-    &-remove {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      width: 4%;
-
-      .button {
-        border-color: darken($color: $gray-line, $amount: 10);
-      }
-
-      svg {
-        transform: rotate(45deg);
-
-        path {
-          fill: darken($color: $gray-line, $amount: 15);
-        }
-      }
-
-      .button {
-        svg {
-          width: 11.5px;
-          height: 11.5px;
-          position: relative;
-        }
-        &:hover,
-        &:active {
-          border-color: darken($color: $gray-line, $amount: 80);
-          background-color: darken($color: $gray-line, $amount: 80);
-        }
       }
     }
   }
@@ -306,3 +222,4 @@ body {
     }
   }
 }
+</style>
