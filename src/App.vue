@@ -7,9 +7,7 @@ import { RouterView } from "vue-router";
   <div class="wrapper">
     <Header />
     <div class="content">
-      <div class="container">
-        <router-view></router-view>
-      </div>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -27,6 +25,10 @@ body {
   margin: 50px auto;
   border-radius: 10px;
   max-width: 1400px;
+  @media (max-width: 470px) {
+    margin: 35px auto;
+    width: calc(100vw - 35px);
+  }
 }
 .content {
   padding: 40px 0;

@@ -18,10 +18,10 @@ import { RouterLink } from "vue-router";
         </div>
       </router-link>
       <div class="header__cart">
-        <a
-          href="/cart.html"
+        <router-link
+          to="/cart"
           class="button button--cart">
-          <span>520 ₽</span>
+          <span class="button__price">520 ₽</span>
           <div class="button__delimiter"></div>
           <svg
             width="18"
@@ -49,13 +49,13 @@ import { RouterLink } from "vue-router";
               stroke-linejoin="round" />
           </svg>
           <span>3</span>
-        </a>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import "../scss/variables";
 
 .header {
@@ -85,6 +85,33 @@ import { RouterLink } from "vue-router";
 
     p {
       color: #7b7b7b;
+    }
+  }
+}
+.button {
+  display: block;
+  @media (max-width: 680px) {
+    padding: 12px 17px;
+    min-width: 70px;
+    .button__price,
+    .button__delimiter {
+      display: none;
+    }
+  }
+  @include noselect();
+  &--cart {
+    display: flex;
+    align-items: center;
+    line-height: 23px;
+    padding: 12px 25px;
+    svg {
+      margin-right: 8px;
+      margin-bottom: 1px;
+    }
+
+    span {
+      font-weight: 600;
+      font-size: 16px;
     }
   }
 }

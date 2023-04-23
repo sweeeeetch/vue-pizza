@@ -55,10 +55,8 @@ const activeDough = ref(0);
   width: 280px;
   text-align: center;
   margin-bottom: 65px;
-  // @media (max-width: 1400px) {
   align-self: center;
   justify-self: center;
-  // }
 
   &__image {
     width: 260px;

@@ -23,9 +23,18 @@ const categoriesArray = ["Все", "Мясные", "Вегетарианская
 @import "../scss/variables";
 
 .categories {
+  @media (max-width: 1290px) {
+    margin-top: 30px;
+    width: 100%;
+    overflow: auto;
+    padding-bottom: 20px;
+  }
+
   ul {
     display: flex;
-
+    @media (max-width: 1260px) {
+      width: 785px;
+    }
     li {
       background-color: #f9f9f9;
       padding: 13px 30px;

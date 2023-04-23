@@ -159,22 +159,5 @@ const increment = () => {
       left: 3px;
     }
   }
-
-  &--cart {
-    display: flex;
-    align-items: center;
-    line-height: 23px;
-    padding: 12px 25px;
-
-    svg {
-      margin-right: 8px;
-      margin-bottom: 1px;
-    }
-
-    span {
-      font-weight: 600;
-      font-size: 16px;
-    }
-  }
 }
 </style>

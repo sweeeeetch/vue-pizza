@@ -48,9 +48,16 @@ const chooseSortOption = (idx: number) => {
 
 .sort {
   position: relative;
+  @media (max-width: 1260px) {
+    padding-left: 15px;
+    display: block;
+  }
   &__label {
     display: flex;
     align-items: center;
+    @media (max-width: 1260px) {
+      display: block;
+    }
 
     svg {
       margin-right: 8px;

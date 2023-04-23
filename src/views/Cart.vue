@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CartItem from "@/components/CartItem.vue";
 import { RouterLink } from "vue-router";
 </script>
 
@@ -20,7 +21,12 @@ import { RouterLink } from "vue-router";
           <span>Очистить корзину</span>
         </div>
       </div>
-      <div class="content__items"></div>
+      <div class="content__items">
+        <CartItem />
+        <CartItem />
+        <CartItem />
+        <CartItem />
+      </div>
       <div class="cart__bottom">
         <div class="cart__bottom-details">
           <span> Всего пицц: <b>3 шт.</b> </span>
