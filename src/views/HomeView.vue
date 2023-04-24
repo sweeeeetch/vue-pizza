@@ -3,7 +3,7 @@ import Categories from "@/components/Categories.vue";
 import Sort from "@/components/Sort.vue";
 import PizzaBlock from "@/components/PizzaBlock.vue";
 import PizzaSkeleton from "@/components/PizzaSkeleton.vue";
-import { onBeforeMount, ref, watchEffect } from "vue";
+import { computed, onBeforeMount, ref, watchEffect } from "vue";
 
 import { useHomeStore } from "@/stores/homeStore";
 const homeStore = useHomeStore();
@@ -15,9 +15,11 @@ interface Pizza {
   imageUrl: string;
   sizes: number[];
   types: number[];
+  category: number;
+  rating: number;
 }
 
-const pizzas = ref<Pizza[]>([]);
+const pizzasArray = ref<Pizza[]>([]);
 const loading = ref(true);
 
 onBeforeMount(async () => {
@@ -25,23 +27,50 @@ onBeforeMount(async () => {
   await fetch("https://6443dc13466f7c2b4b5be5ce.mockapi.io/items")
     .then(data => data.json())
     .then(data => {
+      pizzasArray.value = data;
+    })
+    .finally(() => {
       loading.value = false;
-      pizzas.value = data;
     });
 });
 
-watchEffect(() => {
-  loading.value = true;
-  const apiUrl = `https://6443dc13466f7c2b4b5be5ce.mockapi.io/items?${
-    homeStore.category ? `category=${homeStore.category}` : ""
-  }&sortBy=${homeStore.sort.sort}&order=${homeStore.sort.order}`;
-  fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-      loading.value = false;
-      pizzas.value = data;
-    });
+const pizzas = computed(() => {
+  let filteredPizzas: Pizza[] = pizzasArray.value;
+  filteredPizzas.sort((a, b) => {
+    switch (homeStore.sort.sort) {
+      case "rating":
+        return b.rating - a.rating;
+      case "price":
+        return homeStore.sort.order === "asc" ? a.price - b.price : b.price - a.price;
+      case "title":
+        return a.title.localeCompare(b.title);
+      default:
+        return 0;
+    }
+  });
+  if (homeStore.category) {
+    filteredPizzas = pizzasArray.value.filter(el => el.category === homeStore.category);
+  }
+  if (homeStore.search) {
+    filteredPizzas = pizzasArray.value.filter(el =>
+      el.title.toLowerCase().includes(homeStore.search.toLowerCase())
+    );
+  }
+  return filteredPizzas;
 });
+
+// watchEffect(() => {
+//   loading.value = true;
+//   const apiUrl = `https://6443dc13466f7c2b4b5be5ce.mockapi.io/items?${
+//     homeStore.category ? `category=${homeStore.category}` : ""
+//   }&sortBy=${homeStore.sort.sort}&order=${homeStore.sort.order}`;
+//   fetch(apiUrl)
+//     .then(response => response.json())
+//     .then(data => {
+//       loading.value = false;
+//       pizzasArray.value = data;
+//     });
+// });
 </script>
 
 <template>
