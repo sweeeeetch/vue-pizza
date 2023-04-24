@@ -1,13 +1,22 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+import { useHomeStore } from "@/stores/homeStore";
+const homeStore = useHomeStore();
+
 const isOpen = ref(false);
 const activeSort = ref(0);
 
-const sortOptions = ["популярности", "цене", "алфавиту"];
+const sortOptions = [
+  { name: "популярности", sort: "rating", order: "desc" },
+  { name: "возрастанию цены", sort: "price", order: "asc" },
+  { name: "убыванию цены", sort: "price", order: "desc" },
+  { name: "алфавиту", sort: "title", order: "asc" },
+];
 
 const chooseSortOption = (idx: number) => {
   activeSort.value = idx;
+  homeStore.sort = sortOptions[idx];
   isOpen.value = !isOpen.value;
 };
 </script>
@@ -26,17 +35,17 @@ const chooseSortOption = (idx: number) => {
           fill="#2C2C2C" />
       </svg>
       <b>Сортировка по:</b>
-      <span @click="isOpen = !isOpen">{{ sortOptions[activeSort] }}</span>
+      <span @click="isOpen = !isOpen">{{ sortOptions[activeSort].name }}</span>
     </div>
     <div
       class="sort__popup"
       v-show="isOpen">
       <ul>
         <li
-          v-for="(item, index) in sortOptions"
+          v-for="(obj, index) in sortOptions"
           :class="{ active: activeSort === index }"
           @click="chooseSortOption(index)">
-          {{ item }}
+          {{ obj.name }}
         </li>
       </ul>
     </div>
@@ -83,7 +92,6 @@ const chooseSortOption = (idx: number) => {
     border-radius: 10px;
     overflow: hidden;
     padding: 10px 0;
-    width: 160px;
 
     ul {
       overflow: hidden;

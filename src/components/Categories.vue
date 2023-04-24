@@ -1,8 +1,16 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+import { useHomeStore } from "@/stores/homeStore";
+const homeStore = useHomeStore();
+
 const activeIndex = ref(0);
 const categoriesArray = ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"];
+
+const setActiveCategory = (idx: number) => {
+  activeIndex.value = idx;
+  homeStore.category = idx;
+};
 </script>
 
 <template>
@@ -12,7 +20,7 @@ const categoriesArray = ["Все", "Мясные", "Вегетарианская
         v-for="(item, index) in categoriesArray"
         :key="index"
         :class="{ active: index === activeIndex }"
-        @click="activeIndex = index">
+        @click="setActiveCategory(index)">
         {{ item }}
       </li>
     </ul>

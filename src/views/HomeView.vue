@@ -3,7 +3,10 @@ import Categories from "@/components/Categories.vue";
 import Sort from "@/components/Sort.vue";
 import PizzaBlock from "@/components/PizzaBlock.vue";
 import PizzaSkeleton from "@/components/PizzaSkeleton.vue";
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount, ref, watchEffect } from "vue";
+
+import { useHomeStore } from "@/stores/homeStore";
+const homeStore = useHomeStore();
 
 interface Pizza {
   id: number;
@@ -21,6 +24,19 @@ onBeforeMount(async () => {
   window.scrollTo({ top: 0, left: 0 });
   await fetch("https://6443dc13466f7c2b4b5be5ce.mockapi.io/items")
     .then(data => data.json())
+    .then(data => {
+      loading.value = false;
+      pizzas.value = data;
+    });
+});
+
+watchEffect(() => {
+  loading.value = true;
+  const apiUrl = `https://6443dc13466f7c2b4b5be5ce.mockapi.io/items?${
+    homeStore.category ? `category=${homeStore.category}` : ""
+  }&sortBy=${homeStore.sort.sort}&order=${homeStore.sort.order}`;
+  fetch(apiUrl)
+    .then(response => response.json())
     .then(data => {
       loading.value = false;
       pizzas.value = data;
