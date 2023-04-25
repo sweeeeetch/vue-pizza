@@ -5,6 +5,12 @@ import { useHomeStore } from "@/stores/homeStore";
 const homeStore = useHomeStore();
 
 const seachValue = ref("");
+const input = ref<HTMLInputElement>();
+
+const clearSearch = () => {
+  seachValue.value = "";
+  input.value?.focus();
+};
 
 watch(seachValue, (newValue: string) => {
   homeStore.search = newValue;
@@ -18,6 +24,7 @@ watch(seachValue, (newValue: string) => {
       alt=""
       class="search__svg" />
     <input
+      ref="input"
       class="search__input"
       v-model="seachValue"
       type="text"
@@ -28,7 +35,7 @@ watch(seachValue, (newValue: string) => {
       src="@/assets/svgs/close.svg"
       alt=""
       class="search__close"
-      @click="seachValue = ''" />
+      @click="clearSearch" />
   </div>
 </template>
 

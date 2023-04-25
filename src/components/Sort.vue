@@ -6,6 +6,7 @@ const homeStore = useHomeStore();
 
 const isOpen = ref(false);
 const activeSort = ref(0);
+const sortRef = ref<HTMLDivElement>();
 
 const sortOptions = [
   { name: "популярности", sort: "rating", order: "desc" },
@@ -13,6 +14,23 @@ const sortOptions = [
   { name: "убыванию цены", sort: "price", order: "desc" },
   { name: "алфавиту", sort: "title", order: "asc" },
 ];
+
+const handleClickOutside = (e: Event) => {
+  if (!(e.target as Element).closest(".sort")) {
+    isOpen.value = false;
+    hidePopup();
+    console.log("click");
+  }
+};
+
+const showPopup = () => {
+  isOpen.value = true;
+  document.addEventListener("click", handleClickOutside);
+};
+const hidePopup = () => {
+  isOpen.value = false;
+  document.removeEventListener("click", handleClickOutside);
+};
 
 const chooseSortOption = (idx: number) => {
   activeSort.value = idx;
@@ -22,7 +40,9 @@ const chooseSortOption = (idx: number) => {
 </script>
 
 <template>
-  <div class="sort">
+  <div
+    class="sort"
+    ref="sortRef">
     <div class="sort__label">
       <svg
         width="10"
@@ -35,7 +55,7 @@ const chooseSortOption = (idx: number) => {
           fill="#2C2C2C" />
       </svg>
       <b>Сортировка по:</b>
-      <span @click="isOpen = !isOpen">{{ sortOptions[activeSort].name }}</span>
+      <span @click="showPopup">{{ sortOptions[activeSort].name }}</span>
     </div>
     <div
       class="sort__popup"

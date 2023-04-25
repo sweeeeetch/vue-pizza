@@ -1,32 +1,45 @@
 <script setup lang="ts">
+import { ref, type PropType } from "vue";
+
 import MyButton from "@/components/buttons/MyButton.vue";
-import { ref } from "vue";
+import type { Pizza } from "@/views/HomeView.vue";
+import { useHomeStore } from "@/stores/homeStore";
+const homeStore = useHomeStore();
 
 const props = defineProps({
-  title: { type: String, required: true },
-  price: { type: Number, required: true },
-  image: { type: String, required: true },
-  sizes: { type: Array, required: true },
-  dough: { type: Array, required: true },
+  pizza: { type: Object as PropType<Pizza>, required: true },
 });
 
 const doughNames = ["тонкое", "традиционное"];
 
 const activeSize = ref(0);
 const activeDough = ref(0);
+
+const addItemToCart = () => {
+  const item: Pizza = {
+    ...props.pizza,
+    activeType: doughNames[activeDough.value],
+    activeSize: props.pizza.sizes![activeSize.value],
+  };
+  if (item.sizes && item.types) {
+    delete item.sizes;
+    delete item.types;
+  }
+  homeStore.addItem(item);
+};
 </script>
 
 <template>
   <div class="pizza-block">
     <img
       class="pizza-block__image"
-      :src="image"
+      :src="pizza.imageUrl"
       alt="Pizza" />
-    <h4 class="pizza-block__title">{{ title }}</h4>
+    <h4 class="pizza-block__title">{{ pizza.title }}</h4>
     <div class="pizza-block__selector">
       <ul>
         <li
-          v-for="(item, index) in dough"
+          v-for="(item, index) in pizza.types"
           :class="{ active: activeDough === index }"
           @click="activeDough = index">
           {{ doughNames[item as any] }}
@@ -34,7 +47,7 @@ const activeDough = ref(0);
       </ul>
       <ul>
         <li
-          v-for="(size, index) in sizes"
+          v-for="(size, index) in pizza.sizes"
           :class="{ active: activeSize === index }"
           @click="activeSize = index">
           {{ size }} см.
@@ -42,8 +55,8 @@ const activeDough = ref(0);
       </ul>
     </div>
     <div class="pizza-block__bottom">
-      <div class="pizza-block__price">от {{ price }} ₽</div>
-      <my-button>Добавить</my-button>
+      <div class="pizza-block__price">от {{ pizza.price }} ₽</div>
+      <my-button @click="addItemToCart()">Добавить</my-button>
     </div>
   </div>
 </template>

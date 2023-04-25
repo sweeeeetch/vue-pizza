@@ -3,20 +3,23 @@ import Categories from "@/components/Categories.vue";
 import Sort from "@/components/Sort.vue";
 import PizzaBlock from "@/components/PizzaBlock.vue";
 import PizzaSkeleton from "@/components/PizzaSkeleton.vue";
-import { computed, onBeforeMount, ref, watchEffect } from "vue";
+import { computed, onBeforeMount, ref } from "vue";
 
 import { useHomeStore } from "@/stores/homeStore";
 const homeStore = useHomeStore();
 
-interface Pizza {
+export interface Pizza {
   id: number;
   title: string;
   price: number;
   imageUrl: string;
-  sizes: number[];
-  types: number[];
+  sizes?: number[];
+  types?: number[];
   category: number;
   rating: number;
+  activeType?: string;
+  activeSize?: number;
+  count?: number;
 }
 
 const pizzasArray = ref<Pizza[]>([]);
@@ -52,7 +55,7 @@ const pizzas = computed(() => {
     filteredPizzas = pizzasArray.value.filter(el => el.category === homeStore.category);
   }
   if (homeStore.search) {
-    filteredPizzas = pizzasArray.value.filter(el =>
+    filteredPizzas = filteredPizzas.filter(el =>
       el.title.toLowerCase().includes(homeStore.search.toLowerCase())
     );
   }
@@ -93,11 +96,7 @@ const pizzas = computed(() => {
       <PizzaBlock
         v-for="pizza in pizzas"
         :key="pizza.id"
-        :title="pizza.title"
-        :price="pizza.price"
-        :image="pizza.imageUrl"
-        :sizes="pizza.sizes"
-        :dough="pizza.types" />
+        :pizza="pizza" />
     </div>
   </div>
 </template>
