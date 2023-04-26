@@ -5,6 +5,7 @@ import { useHomeStore } from "@/stores/homeStore";
 const homeStore = useHomeStore();
 
 const activeIndex = ref(0);
+activeIndex.value = homeStore.category;
 const categoriesArray = ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"];
 
 const setActiveCategory = (idx: number) => {

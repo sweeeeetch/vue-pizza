@@ -3,6 +3,7 @@ import { RouterLink } from "vue-router";
 
 import Search from "@/components/Search.vue";
 import { useHomeStore } from "@/stores/homeStore";
+
 const homeStore = useHomeStore();
 </script>
 
@@ -21,8 +22,10 @@ const homeStore = useHomeStore();
           <p>самая вкусная пицца во вселенной</p>
         </div>
       </router-link>
-      <Search />
-      <div class="header__cart">
+      <Search v-if="$route.path !== '/cart'" />
+      <div
+        class="header__cart"
+        v-if="$route.path !== '/cart'">
         <router-link
           to="/cart"
           class="button button--cart">

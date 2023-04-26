@@ -3,7 +3,7 @@ import { ref, type PropType } from "vue";
 
 import MyButton from "@/components/buttons/MyButton.vue";
 import type { Pizza } from "@/views/HomeView.vue";
-import { useHomeStore } from "@/stores/homeStore";
+import { useHomeStore, type CartPizza } from "@/stores/homeStore";
 const homeStore = useHomeStore();
 
 const props = defineProps({
@@ -16,15 +16,15 @@ const activeSize = ref(0);
 const activeDough = ref(0);
 
 const addItemToCart = () => {
-  const item: Pizza = {
-    ...props.pizza,
+  const item: CartPizza = {
+    id: props.pizza.id,
+    imageUrl: props.pizza.imageUrl,
+    price: props.pizza.price,
+    title: props.pizza.title,
     activeType: doughNames[activeDough.value],
     activeSize: props.pizza.sizes![activeSize.value],
+    count: 1,
   };
-  if (item.sizes && item.types) {
-    delete item.sizes;
-    delete item.types;
-  }
   homeStore.addItem(item);
 };
 </script>
@@ -34,7 +34,7 @@ const addItemToCart = () => {
     <img
       class="pizza-block__image"
       :src="pizza.imageUrl"
-      alt="Pizza" />
+      :alt="pizza.title" />
     <h4 class="pizza-block__title">{{ pizza.title }}</h4>
     <div class="pizza-block__selector">
       <ul>
@@ -73,6 +73,10 @@ const addItemToCart = () => {
 
   &__image {
     width: 260px;
+    transition: all 0.3s ease;
+    &:hover {
+      transform: translateY(-7px);
+    }
   }
 
   &__title {

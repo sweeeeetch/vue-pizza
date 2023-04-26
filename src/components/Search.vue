@@ -45,6 +45,9 @@ watch(seachValue, (newValue: string) => {
 .search {
   position: relative;
   margin-right: 120px;
+  @media (max-width: 960px) {
+    display: none;
+  }
   &__input {
     border: 1px solid rgba($orange, 0.5);
     padding: 10px 30px 10px 35px;

@@ -61,19 +61,6 @@ const pizzas = computed(() => {
   }
   return filteredPizzas;
 });
-
-// watchEffect(() => {
-//   loading.value = true;
-//   const apiUrl = `https://6443dc13466f7c2b4b5be5ce.mockapi.io/items?${
-//     homeStore.category ? `category=${homeStore.category}` : ""
-//   }&sortBy=${homeStore.sort.sort}&order=${homeStore.sort.order}`;
-//   fetch(apiUrl)
-//     .then(response => response.json())
-//     .then(data => {
-//       loading.value = false;
-//       pizzasArray.value = data;
-//     });
-// });
 </script>
 
 <template>

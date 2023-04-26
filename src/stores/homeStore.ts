@@ -1,5 +1,14 @@
-import type { Pizza } from "@/views/HomeView.vue";
 import { defineStore } from "pinia";
+
+export interface CartPizza {
+  id: number;
+  title: string;
+  price: number;
+  imageUrl: string;
+  activeType: string;
+  activeSize: number;
+  count: number;
+}
 
 export const useHomeStore = defineStore("homeStore", {
   state: () => ({
@@ -7,10 +16,10 @@ export const useHomeStore = defineStore("homeStore", {
     category: 0,
     search: "",
     totalPrice: 0,
-    cart: [] as Pizza[],
+    cart: [] as CartPizza[],
   }),
   actions: {
-    addItem(item: Pizza) {
+    addItem(item: CartPizza) {
       const findItem = this.cart.find(
         el =>
           el.id === item.id &&
@@ -18,13 +27,13 @@ export const useHomeStore = defineStore("homeStore", {
           el.activeType === item.activeType
       );
       if (findItem) {
-        findItem.count!++;
+        findItem.count++;
       } else {
-        this.cart.push({ ...item, count: 1 });
+        this.cart.push(item);
       }
       this.totalPrice += item.price;
     },
-    removeItem(item: Pizza) {
+    removeItem(item: CartPizza) {
       const index = this.cart.findIndex(cartItem => {
         return (
           cartItem.id === item.id &&

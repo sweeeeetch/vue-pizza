@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import type { Pizza } from "@/views/HomeView.vue";
 import type { PropType } from "vue";
 
-import { useHomeStore } from "@/stores/homeStore";
+import { useHomeStore, type CartPizza } from "@/stores/homeStore";
 const homeStore = useHomeStore();
 
 const props = defineProps({
-  pizza: { type: Object as PropType<Pizza>, required: true },
+  pizza: { type: Object as PropType<CartPizza>, required: true },
 });
 
 const incrementPizza = () => {
@@ -14,8 +13,12 @@ const incrementPizza = () => {
   homeStore.totalPrice += props.pizza.price;
 };
 const decrementPizza = () => {
-  props.pizza.count!--;
-  homeStore.totalPrice -= props.pizza.price;
+  if (props.pizza.count !== 1) {
+    props.pizza.count!--;
+    homeStore.totalPrice -= props.pizza.price;
+  } else {
+    homeStore.removeItem(props.pizza);
+  }
 };
 
 const removePizza = () => {
