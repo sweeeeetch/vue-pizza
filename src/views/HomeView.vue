@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Categories from "@/components/Categories.vue";
-import Sort from "@/components/Sort.vue";
-import PizzaBlock from "@/components/PizzaBlock.vue";
-import PizzaSkeleton from "@/components/PizzaSkeleton.vue";
+import Categories from "@/components/features/Categories.vue";
+import Sort from "@/components/features/Sort.vue";
+import PizzaBlock from "@/components/Pizzas/PizzaBlock.vue";
+import PizzaSkeleton from "@/components/Pizzas/PizzaSkeleton.vue";
 import { computed, onBeforeMount, ref } from "vue";
 
 import { useHomeStore } from "@/stores/homeStore";

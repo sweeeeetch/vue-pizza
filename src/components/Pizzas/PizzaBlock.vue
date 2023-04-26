@@ -42,7 +42,7 @@ const addItemToCart = () => {
           v-for="(item, index) in pizza.types"
           :class="{ active: activeDough === index }"
           @click="activeDough = index">
-          {{ doughNames[item as any] }}
+          {{ doughNames[item] }}
         </li>
       </ul>
       <ul>

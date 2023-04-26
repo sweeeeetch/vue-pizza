@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import PizzaCartItem from "@/components/PizzaCartItem.vue";
+import PizzaCartItem from "@/components/Pizzas/PizzaCartItem.vue";
 import { RouterLink } from "vue-router";
 
 import { useHomeStore } from "@/stores/homeStore";

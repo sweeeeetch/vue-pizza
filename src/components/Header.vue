@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 
-import Search from "@/components/Search.vue";
+import Search from "@/components/features/Search.vue";
 import { useHomeStore } from "@/stores/homeStore";
 
 const homeStore = useHomeStore();
