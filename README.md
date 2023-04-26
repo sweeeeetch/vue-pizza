@@ -3,10 +3,10 @@
     <img src="public/pizza-logo.svg" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Chat App</h3>
+  <h3 align="center">Vue Pizza</h3>
 
   <p align="center">
-    Simple pet project of Chat App
+    Simple pet project for online pizza shop.
     <br />
     <a href="https://github.com/finalepta/vue-pizza"><strong>Explore the README »</strong></a>
     <br />
