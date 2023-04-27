@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://github.com/finalepta/vue-pizza">
+  <a href="https://github.com/sweeeeetch/vue-pizza">
     <img src="public/pizza-logo.svg" alt="Logo" width="80" height="80">
   </a>
 
@@ -8,14 +8,14 @@
   <p align="center">
     Simple pet project for online pizza shop.
     <br />
-    <a href="https://github.com/finalepta/vue-pizza"><strong>Explore the README »</strong></a>
+    <a href="https://github.com/sweeeeetch/vue-pizza"><strong>Explore the README »</strong></a>
     <br />
     <br />
     <a href="ornate-torrone-d14813.netlify.app">View Demo</a>
     ·
-    <a href="https://github.com/finalepta/vue-pizza/issues">Report Bug</a>
+    <a href="https://github.com/sweeeeetch/vue-pizza/issues">Report Bug</a>
     ·
-    <a href="https://github.com/finalepta/vue-pizza/issues">Request Feature</a>
+    <a href="https://github.com/sweeeeetch/vue-pizza/issues">Request Feature</a>
   </p>
 </div>
 
