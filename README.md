@@ -11,7 +11,7 @@
     <a href="https://github.com/finalepta/vue-pizza"><strong>Explore the README »</strong></a>
     <br />
     <br />
-    <a href="https://fastidious-caramel-a438c3.netlify.app">View Demo</a>
+    <a href="ornate-torrone-d14813.netlify.app">View Demo</a>
     ·
     <a href="https://github.com/finalepta/vue-pizza/issues">Report Bug</a>
     ·
