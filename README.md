@@ -11,7 +11,7 @@
     <a href="https://github.com/sweeeeetch/vue-pizza"><strong>Explore the README »</strong></a>
     <br />
     <br />
-    <a href="ornate-torrone-d14813.netlify.app">View Demo</a>
+    <a href="https://ornate-torrone-d14813.netlify.app">View Demo</a>
     ·
     <a href="https://github.com/sweeeeetch/vue-pizza/issues">Report Bug</a>
     ·
